@@ -19,3 +19,6 @@ A maze game for terminal/console. The program is written with C++.
     - merge sort
     - quick sort
     - topological sort
+
+## Resources
+- https://en.wikipedia.org/wiki/Maze_generation_algorithm
