@@ -339,11 +339,11 @@ public:
             SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ (short)OFFSET + 4, (short)OFFSET + 3 });
             std::cout << "Play";
             SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ (short)OFFSET + 4, (short)OFFSET + 4 });
-            std::cout << "Scoreboard";
-            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ (short)OFFSET + 4, (short)OFFSET + 5 });
             std::cout << "About";
-            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ (short)OFFSET + 4, (short)OFFSET + 6 });
+            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ (short)OFFSET + 4, (short)OFFSET + 5 });
             std::cout << "Exit";
+            //SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ (short)OFFSET + 4, (short)OFFSET + 6 });
+            //std::cout << "Scoreboard";
 
             key = _getch();
 
@@ -354,7 +354,7 @@ public:
                     pos--;
                     clearScreen();
                 }
-                else if(key == ARROW_DOWN && pos != 3) {
+                else if(key == ARROW_DOWN && pos != 2) {
                     pos++;
                     clearScreen();
                 }
@@ -365,12 +365,10 @@ public:
                 case 0: // play
                     this->play();
                     break;
-                case 1: // scoreboard
-                    break;
-                case 2: // about
+                case 1: // about
                     this->about();
                     break;
-                case 3: // exit
+                case 2: // exit
                     break;
                 }
 
