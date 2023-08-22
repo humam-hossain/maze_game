@@ -3,6 +3,23 @@
 #include <ctime>
 #include <Windows.h>
 #include <chrono>
+#include <conio.h>
+
+void clearScreen() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD coordScreen = { 0, 0 };
+    DWORD cCharsWritten;
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    DWORD dwConSize;
+
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
+    dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
+
+    FillConsoleOutputCharacter(hConsole, ' ', dwConSize, coordScreen, &cCharsWritten);
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
+    FillConsoleOutputAttribute(hConsole, csbi.wAttributes, dwConSize, coordScreen, &cCharsWritten);
+    SetConsoleCursorPosition(hConsole, coordScreen);
+}
 
 class Cell {
 public:
@@ -13,7 +30,7 @@ public:
 
     bool visited = false;
 
-    // top, right, botto, left
+    // top, right, bottom, left
     bool walls[4] = {true, true, true, true};
 
     void removeWalls(Cell current, Cell next) {
@@ -159,6 +176,7 @@ public:
     void generate() {
         this->grid[current.row][current.col].visited = true;
 
+        //this->draw();
 
         if (checkNeighbours(current).col != -1) {
              Cell next = checkNeighbours(current);
@@ -179,6 +197,8 @@ public:
         if (this->stack.getLength() == 0) {
             return;
         }
+
+        //clearScreen();
 
         this->generate();
     }
@@ -232,7 +252,7 @@ private:
 int main()
 {
     std::srand(time(0));
-    int size = 10;
+    int size = 5 + rand() % (15-5);
 
     Maze maze(size);
     maze.setup();
