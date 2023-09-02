@@ -7,6 +7,7 @@
 #include "Player.h"
 
 #define OFFSET 5
+#define ENTER_SOUND 988
 
 int main()
 {
@@ -14,10 +15,15 @@ int main()
 
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ (short)OFFSET, (short)OFFSET });
 
+    // Welcome Sound
+    Beep(523, 500);
+
     std::cout << "Player: ";
 
     std::string name;
     std::cin >> name;
+
+    Beep(ENTER_SOUND, 100);
 
     Player player(0, 0, name, 1);
     player.menu();
